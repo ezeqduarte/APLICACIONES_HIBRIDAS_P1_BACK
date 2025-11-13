@@ -1,27 +1,33 @@
 import { User } from "../models/User.js";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+
+function generateToken(userId) {
+  return jwt.sign({ id: userId }, process.env.JWT_SECRET, {
+    expiresIn: "7d",
+  });
+}
 
 export const register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    // ¿ya existe el usuario?
     const userExists = await User.findOne({ email });
     if (userExists)
       return res.status(400).json({ message: "El email ya está registrado" });
 
-    // encriptar contraseña
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // crear usuario
     const newUser = await User.create({
       username,
       email,
       password: hashedPassword,
     });
+    const token = generateToken(newUser._id);
 
     res.status(201).json({
       message: "Usuario registrado correctamente",
+      token,
       user: {
         id: newUser._id,
         username: newUser.username,
@@ -30,6 +36,9 @@ export const register = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
+    if (error.code === 11000) {
+      return res.status(400).json({ message: "El email ya está registrado" });
+    }
     res.status(500).json({ message: "Error al registrar usuario" });
   }
 };
@@ -38,26 +47,30 @@ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // verificar si existe
     const user = await User.findOne({ email });
-    if (!user)
+    if (!user) {
       return res.status(400).json({ message: "Credenciales incorrectas" });
+    }
 
-    // verificar contraseña
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch)
+    if (!isMatch) {
+      console.log("Contraseña incorrecta");
       return res.status(400).json({ message: "Credenciales incorrectas" });
+    }
 
-    // sin token por ahora, solo confirmamos
-    res.json({
+    const token = generateToken(user._id);
+    return res.json({
       message: "Login correcto",
+      token,
       user: {
         id: user._id,
         username: user.username,
         email: user.email,
       },
     });
+
   } catch (error) {
-    res.status(500).json({ message: "Error al iniciar sesión" });
+    console.error("ERROR LOGIN:", error);
+    return res.status(500).json({ message: "Error al iniciar sesión" });
   }
 };
