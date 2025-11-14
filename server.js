@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { connectDB } from "./src/config/db.js";
 import authRoutes from "./src/routes/authRoutes.js";
+import postRoutes from "./src/routes/postRoutes.js";
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(cors());
 connectDB();
 
 app.use("/api/auth", authRoutes);
+app.use("/api/posts", postRoutes);
 
 app.get("/", (req, res) => res.send("API funcionando 🚀"));
 
