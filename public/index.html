@@ -2,52 +2,151 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <title>Documentación API - Blog Gamer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <h1>Documentación de la API - Blog Gamer</h1>
-  <p>Esta es la API creada para el parcial de Aplicaciones Híbridas 1.</p>
 
-  <h2>Endpoints principales</h2>
+  <div class="container">
+    <h1>Documentación de la API - Blog Gamer</h1>
+    <p class="intro">
+      Esta API permite manejar usuarios, posts y comentarios para el proyecto <strong>Blog Gamer</strong>.
+    </p>
 
-  <h3>Auth</h3>
-  <ul>
-    <li>POST /api/auth/register — Registrar usuario</li>
-    <li>POST /api/auth/login — Iniciar sesión</li>
-    <li>GET /api/auth/profile — Ver perfil (requiere token)</li>
-  </ul>
+    <section>
+      <h2>Autenticación</h2>
 
-  <h3>Posts</h3>
-  <ul>
-    <li>GET /api/posts — Listar posts</li>
-    <li>GET /api/posts/:id — Ver un post específico</li>
-    <li>POST /api/posts — Crear post (requiere token)</li>
-    <li>PUT /api/posts/:id — Editar post propio (requiere token)</li>
-    <li>DELETE /api/posts/:id — Eliminar post propio (requiere token)</li>
-  </ul>
+      <div class="card">
+        <h3>POST /api/auth/register</h3>
+        <p>Registra un nuevo usuario en la plataforma.</p>
 
-  <h3>Comentarios</h3>
-  <ul>
-    <li>GET /api/comments/:postId — Obtener comentarios del post</li>
-    <li>POST /api/comments — Crear comentario</li>
-    <li>DELETE /api/comments/:id — Eliminar comentario propio</li>
-    <li>GET /api/comments/user/:id/count — Cantidad de comentarios de un usuario</li>
-  </ul>
+        <h4>Body:</h4>
+        <pre>{
+  "username": "eze",
+  "email": "eze@example.com",
+  "password": "123456"
+}</pre>
 
-  <h3>Usuarios públicos</h3>
-  <ul>
-    <li>GET /api/users/:id — Perfil público del usuario</li>
-  </ul>
+        <h4>Respuesta:</h4>
+        <pre>{
+  "message": "Usuario registrado correctamente",
+  "token": "...",
+  "user": { "id": "...", "username": "eze", "email": "eze@example.com" }
+}</pre>
+      </div>
 
-  <footer>
-    <p><strong>Alumno:</strong> Ezequiel Duarte</p>
-    <p><strong>Materia:</strong> Aplicaciones Híbridas 1</p>
-    <p><strong>Profesor:</strong> Cruz, Jonathan Emanuel</p>
-    <p><strong>Comisión:</strong> A-1331</p>
-  </footer>
+      <div class="card">
+        <h3>POST /api/auth/login</h3>
+        <p>Permite iniciar sesión y obtener el token.</p>
+
+        <h4>Body:</h4>
+        <pre>{
+  "email": "eze@example.com",
+  "password": "123456"
+}</pre>
+
+        <h4>Respuesta:</h4>
+        <pre>{
+  "message": "Login correcto",
+  "token": "...",
+  "user": { "id": "...", "username": "eze", "email": "eze@example.com" }
+}</pre>
+      </div>
+
+      <div class="card">
+        <h3>GET /api/auth/profile</h3>
+        <p>Devuelve datos del usuario autenticado.</p>
+
+        <h4>Headers:</h4>
+        <pre>Authorization: Bearer token</pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>Posts</h2>
+
+      <div class="card">
+        <h3>GET /api/posts</h3>
+        <p>Obtiene todos los posts publicados.</p>
+      </div>
+
+      <div class="card">
+        <h3>GET /api/posts/:id</h3>
+        <p>Devuelve un post específico por ID.</p>
+      </div>
+
+      <div class="card">
+        <h3>POST /api/posts</h3>
+        <p>Crea un nuevo post (requiere token).</p>
+
+        <h4>Body:</h4>
+        <pre>{
+  "title": "Mi post gamer",
+  "content": "Contenido del post..."
+}</pre>
+      </div>
+
+      <div class="card">
+        <h3>PUT /api/posts/:id</h3>
+        <p>Edita un post propio.</p>
+      </div>
+
+      <div class="card">
+        <h3>DELETE /api/posts/:id</h3>
+        <p>Elimina un post propio.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Comentarios</h2>
+
+      <div class="card">
+        <h3>GET /api/comments/:postId</h3>
+        <p>Obtiene todos los comentarios de un post.</p>
+      </div>
+
+      <div class="card">
+        <h3>POST /api/comments</h3>
+        <p>Crea un comentario.</p>
+
+        <h4>Body:</h4>
+        <pre>{
+  "postId": "ID_DEL_POST",
+  "content": "Gran post!"
+}</pre>
+      </div>
+
+      <div class="card">
+        <h3>DELETE /api/comments/:id</h3>
+        <p>Elimina un comentario propio.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Usuarios</h2>
+      <div class="card">
+        <h3>GET /api/user/:id</h3>
+        <p>Devuelve el perfil público de un usuario.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p><strong>Alumno:</strong> Ezequiel Duarte</p>
+      <p><strong>Comisión:</strong> A-1331</p>
+      <p><strong>Profesor:</strong> Jonathan Cruz</p>
+      <p>© <span id="year"></span> Todos los derechos reservados</p>
+    </footer>
+
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
 </body>
 
 </html>
