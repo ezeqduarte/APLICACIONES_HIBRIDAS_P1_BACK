@@ -92,3 +92,19 @@ footer {
 footer p {
   margin-bottom: 6px;
 }
+
+.btn-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 14px;
+  background: #ff3b3b;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn-link:hover {
+  background: #e53838;
+}
