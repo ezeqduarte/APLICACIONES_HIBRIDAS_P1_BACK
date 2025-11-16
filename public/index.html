@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Documentación de la API - Blog Gamer</h1>
+  <p>Esta es la API creada para el parcial de Aplicaciones Híbridas 1.</p>
+
+  <h2>Endpoints principales</h2>
+
+  <h3>Auth</h3>
+  <ul>
+    <li>POST /api/auth/register — Registrar usuario</li>
+    <li>POST /api/auth/login — Iniciar sesión</li>
+    <li>GET /api/auth/profile — Ver perfil (requiere token)</li>
+  </ul>
+
+  <h3>Posts</h3>
+  <ul>
+    <li>GET /api/posts — Listar posts</li>
+    <li>GET /api/posts/:id — Ver un post específico</li>
+    <li>POST /api/posts — Crear post (requiere token)</li>
+    <li>PUT /api/posts/:id — Editar post propio (requiere token)</li>
+    <li>DELETE /api/posts/:id — Eliminar post propio (requiere token)</li>
+  </ul>
+
+  <h3>Comentarios</h3>
+  <ul>
+    <li>GET /api/comments/:postId — Obtener comentarios del post</li>
+    <li>POST /api/comments — Crear comentario</li>
+    <li>DELETE /api/comments/:id — Eliminar comentario propio</li>
+    <li>GET /api/comments/user/:id/count — Cantidad de comentarios de un usuario</li>
+  </ul>
+
+  <h3>Usuarios públicos</h3>
+  <ul>
+    <li>GET /api/users/:id — Perfil público del usuario</li>
+  </ul>
+
+  <footer>
+    <p><strong>Alumno:</strong> Ezequiel Duarte</p>
+    <p><strong>Materia:</strong> Aplicaciones Híbridas 1</p>
+    <p><strong>Profesor:</strong> Cruz, Jonathan Emanuel</p>
+    <p><strong>Comisión:</strong> A-1331</p>
+  </footer>
+</body>
+
+</html>
