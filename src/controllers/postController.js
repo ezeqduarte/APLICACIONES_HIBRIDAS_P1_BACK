@@ -81,3 +81,16 @@ export const deletePost = async (req, res) => {
   }
 };
 
+export const getPostsByUser = async (req, res) => {
+  try {
+    const posts = await Post.find({ createdBy: req.params.id })
+      .populate("createdBy", "username email")
+      .sort({ createdAt: -1 }); // últimos primero
+
+    res.json(posts);
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener posts del usuario" });
+  }
+};
+
+

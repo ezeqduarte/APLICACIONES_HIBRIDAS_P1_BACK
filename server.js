@@ -4,6 +4,7 @@ import cors from "cors";
 import { connectDB } from "./src/config/db.js";
 import authRoutes from "./src/routes/authRoutes.js";
 import postRoutes from "./src/routes/postRoutes.js";
+import userRoutes from "./src/routes/userRoutes.js";
 
 dotenv.config();
 
@@ -15,8 +16,9 @@ connectDB();
 
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api/user", userRoutes);
 
-app.get("/", (req, res) => res.send("API funcionando 🚀"));
+app.get("/", (req, res) => res.send("API funcionando"));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Servidor corriendo en puerto", PORT));
