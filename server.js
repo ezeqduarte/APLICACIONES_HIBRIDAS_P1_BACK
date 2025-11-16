@@ -5,6 +5,7 @@ import { connectDB } from "./src/config/db.js";
 import authRoutes from "./src/routes/authRoutes.js";
 import postRoutes from "./src/routes/postRoutes.js";
 import userRoutes from "./src/routes/userRoutes.js";
+import commentRoutes from "./src/routes/commentRoutes.js";
 
 dotenv.config();
 
@@ -17,6 +18,8 @@ connectDB();
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/comments", commentRoutes);
+
 
 app.get("/", (req, res) => res.send("API funcionando"));
 
