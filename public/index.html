@@ -13,10 +13,41 @@
 
   <div class="container">
     <h1>Documentación de la API - Blog Gamer</h1>
-    <p class="intro">
-      Esta API permite manejar usuarios, posts y comentarios para el proyecto <strong>Blog Gamer</strong>.
-    </p>
-
+    <section class="intro">
+      <p>
+        Esta API permite manejar usuarios, posts y comentarios para el proyecto <strong>Blog Gamer</strong>.
+      </p>
+      <p>
+        La base de datos de esta API está diseñada para soportar un sistema de blog
+        donde los usuarios pueden publicar contenido, interactuar entre sí y mantener
+        un historial de actividad. Su estructura se organiza en tres colecciones
+        principales: <strong>usuarios</strong>, <strong>posts</strong> y
+        <strong>comentarios</strong>, conectadas entre sí mediante identificadores
+        únicos.
+      </p>
+      <br>
+      <p>
+        <strong>Usuarios (User):</strong> almacenan la información de cada persona
+        registrada, incluyendo nombre de usuario, email y contraseña encriptada.
+        Cada usuario puede crear posts y comentarios, y solo puede editar o eliminar
+        su propio contenido.
+      </p>
+      <br>
+      <p>
+        <strong>Posts (Post):</strong> representan las publicaciones del blog. Cada
+        post contiene título, contenido, fecha de creación y una referencia al
+        usuario que lo creó. Esta relación permite mostrar los posts de un usuario y
+        construir su perfil público.
+      </p>
+      <br>
+      <p>
+        <strong>Comentarios (Comment):</strong> permiten la interacción entre los
+        usuarios dentro de cada publicación. Cada comentario guarda su contenido,
+        autor, post asociado y fecha. Un usuario puede realizar múltiples
+        comentarios, y un post puede acumular varios comentarios.
+      </p>
+      <br>
+    </section>
     <section>
       <h2>Autenticación</h2>
 
